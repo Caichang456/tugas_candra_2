@@ -21,7 +21,7 @@
 			$data=mysqli_query($koneksi,"SELECT * FROM tb_status ORDER BY id_status DESC");
 			while ($d=mysqli_fetch_array($data)) { ?>
 				<div class="card-body">
-					<h5 class="card-header"><?php echo $d['nama']; echo " "; echo $d['tanggal']; ?></h5>
+					<h5 class="card-header"><?php echo $d['nama']." ".$d['tanggal']; ?></h5>
 					<div class="card-body">
 						<p class="card-text"><?php echo $d['status']; ?></p>
 						<form method="POST">
@@ -32,9 +32,9 @@
 						</form>
 						<?php
 							include "koneksi.php";
-							$data2=mysqli_query($koneksi,"SELECT * FROM tb_komentar WHERE id_status='$d['id_status']' ORDER BY id_komentar DESC");
+							$data2=mysqli_query($koneksi,"SELECT * FROM tb_komentar WHERE id_status='<?php $d['id_status']; ?>' ORDER BY id_komentar DESC");
 							while ($d2=mysqli_fetch_array($data2)) { ?>
-								<p class="card-text"><?php echo $d2['nama_komentar']; echo " "; echo $d2['tanggal_komentar']; echo " "; echo $d2['isi_komentar']; ?></p>
+								<p class="card-text"><?php echo $d2['nama_komentar']." ".$d2['tanggal_komentar']." ".$d2['isi_komentar']; ?></p>
 							<?php }
 						?>
 					</div>
