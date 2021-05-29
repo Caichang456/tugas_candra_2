@@ -1,6 +1,6 @@
 <?php
 	$koneksi=mysqli_connect("localhost","root","","db_tugas_2");
 	if(mysqli_connect_errno()){
-		echo "Koneksi database gagal".mysqli_connect_error();
+		echo "<div class='alert alert-danger' role='alert'>  Koneksi database gagal </div>".mysqli_connect_error();
 	}
 ?>
