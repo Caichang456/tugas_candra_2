@@ -32,7 +32,7 @@
 						</form>
 						<?php
 							include "koneksi.php";
-							$data2=mysqli_query($koneksi,"SELECT * FROM tb_komentar WHERE id_status='<?php $d['id_status']; ?>' ORDER BY id_komentar DESC");
+							$data2=mysqli_query($koneksi,"SELECT * FROM tb_komentar WHERE id_status='".$d['id_status']."' ORDER BY id_komentar DESC");
 							while ($d2=mysqli_fetch_array($data2)) { ?>
 								<p class="card-text"><?php echo $d2['nama_komentar']." ".$d2['tanggal_komentar']." ".$d2['isi_komentar']; ?></p>
 							<?php }
