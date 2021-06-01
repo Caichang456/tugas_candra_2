@@ -25,7 +25,7 @@
 					<div class="card-body">
 						<p class="card-text"><?php echo $d['status']; ?></p>
 						<form method="POST">
-							<input type="hidden" name="txt_id_status" value="<?php $d['id_status']; ?>">
+							<input type="hidden" name="txt_id_status" value="<?php echo $d['id_status']; ?>">
 							<input type="text" name="txt_nama_komentar" placeholder="Nama Komentar"><br>
 							<textarea name="txt_isi_komentar" placeholder="Isi Komentar"></textarea><br>
 							<input class="btn btn-primary" type="submit" name="simpan_komentar" value="Simpan Komentar">
@@ -73,7 +73,7 @@
 			echo "<div class='alert alert-danger' role='alert'>Isi Komentar tidak boleh kosong! </div>";
 		}
 		else{
-			mysqli_query($koneksi,"INSERT INTO tb_status(id_status,nama_komentar,isi_komentar,tanggal) VALUES('$id_status','$nama_komentar','$isi_komentar','$tanggal')");
+			mysqli_query($koneksi,"INSERT INTO tb_komentar(id_status,nama_komentar,isi_komentar,tanggal_komentar) VALUES('$id_status','$nama_komentar','$isi_komentar','$tanggal')");
 			header("location:index.php");
 			echo "<div class='alert alert-success' role='alert'> Nama dan Status berhasil disimpan </div>";
 		}
