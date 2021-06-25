@@ -19,30 +19,52 @@
 		</div>
 	</div>
 	<?php
+
+
 	include "koneksi.php";
 	$tampilSemuaStatus = mysqli_query($koneksi, "SELECT * FROM tb_status ORDER BY id_status DESC");
 	$dataStatus = [];
 	$idStatusArray = [];
 	$namaStatusArray = [];
 	$tanggalStatusArray = [];
+
+
 	while ($statusArray = mysqli_fetch_array($tampilSemuaStatus)) {
+		//teknik push
 		$dataStatus[]=$statusArray;
 		$idStatusArray[] = $statusArray['id_status'];
 		$namaStatusArray[] = $statusArray['nama'];
 		$isiStatusArray[] = $statusArray['status'];
-		$tanggalStatusArray[] = $statusArray['tanggal'];
+		$tanggalStatusArray[] = $statusArray['tanggal']; 
 	}
 	$idStatusTeks = implode(",", $idStatusArray);
 	$tampilSemuaKomentar = mysqli_query($koneksi, "SELECT * FROM tb_komentar WHERE id_status IN ($idStatusTeks)");
 	$dataKomentar = [];
-	$n = [];
+	$idStatusKomentarArray = [];
 	while ($komentarArray = mysqli_fetch_array($tampilSemuaKomentar)) {
-		$dataKomentar[$komentarArray['id_status']] = $komentarArray;
-		$n[] = $komentarArray['id_komentar'];
+		//ID Status
+		if(empty($dataKomentar[$komentarArray['id_status']])){
+			$dataKomentar[$komentarArray['id_status']]=[];
+		}
+		$dataKomentar[$komentarArray['id_status']][] = $komentarArray;
+		//$dataKomentar[9]=$komentarArray;
+		//$dataKomentar[] = $komentarArray;
+		//echo $komentarArray['id_status']."<br>";
+		//$n[] = $komentarArray['id_komentar'];
 		//print_r($komentar);
+		//$idStatusKomentarArray[]=$komentarArray['id_status'];
 	}
 	print_r($dataKomentar);
-	//die();
+		
+	//print_r($idStatusKomentarArray);
+
+	//$status = [4,5,6]
+	//$dataKomentar[6];
+	//echo '<pre>';
+	//print_r($dataKomentar);
+	//print_r("<hr />");
+	
+	die();
 	?>
 	<?php
 		foreach($dataStatus as $statuses){ ?>
@@ -59,7 +81,11 @@
 					<?php
 						foreach($dataKomentar as $indeks => $komentars){
 							if($indeks==$statuses['id_status']){ ?>
-								<p class="card-text"><?php echo $komentars['nama_komentar']." ".$komentars['tanggal_komentar']." ".$komentars['isi_komentar']; ?></p>
+								<?php
+									foreach($komentars as $k){ ?>
+										<p class="card-text"><?php echo $k['nama_komentar']." ".$k['tanggal_komentar']." ".$k['isi_komentar']; ?></p>
+									<?php }
+								?>
 							<?php }
 						}
 					?>
